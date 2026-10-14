@@ -2,16 +2,16 @@ package com.spy.app
 
 import android.content.Context
 import android.os.Environment
+import fi.iki.elonen.NanoHTTPD
 import java.io.File
-import java.io.InputStream
 
 class HttpServer(
     port: Int,
     private val ctx: Context,
     private val camera: CameraController
-) : fi.iki.elonen.NanoHTTPD(port) {
+) : NanoHTTPD(port) {
 
-    override fun serve(session: fi.iki.elonen.NanoHTTPD$Session): Response {
+    override fun serve(session: IHTTPSession): Response {
         return when {
             session.uri == "/" -> newFixedLengthResponse(
                 "<html><body style='font-family:sans-serif'>" +
@@ -48,7 +48,7 @@ class HttpServer(
             }
 
             session.uri.startsWith("/foto") -> {
-                val path = session.parameters["p"]?.firstOrNull()
+                val path = session.parms["p"]
                 val f = path?.let { File(it) }
                 if (f != null && f.exists())
                     newChunkedResponse(Response.Status.OK, "image/jpeg", f.inputStream())
