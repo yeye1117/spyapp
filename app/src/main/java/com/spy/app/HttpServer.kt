@@ -3,6 +3,7 @@ package com.spy.app
 import android.content.Context
 import android.os.Environment
 import fi.iki.elonen.NanoHTTPD
+import fi.iki.elonen.NanoHTTPD$Session
 import java.io.File
 import java.io.InputStream
 
