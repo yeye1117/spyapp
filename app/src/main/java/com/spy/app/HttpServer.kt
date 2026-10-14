@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Environment
 import fi.iki.elonen.NanoHTTPD
 import java.io.File
+import java.io.InputStream
 
 class HttpServer(
     port: Int,
